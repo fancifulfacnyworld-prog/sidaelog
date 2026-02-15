@@ -1,4 +1,4 @@
- import Link from "next/link";
+import Link from "next/link";
 import { getAllArticles } from "@/lib/articles";
 
 export default function Home() {
@@ -13,10 +13,13 @@ export default function Home() {
             SIDAELOG · ISSUE 001
           </div>
           <h1 className="mt-3 text-[48px] leading-[1.02] tracking-[-0.05em]">
-            시대로그
+            시대Log
           </h1>
           <p className="mt-4 max-w-[60ch] text-[15px] leading-[1.85] text-black/65">
-            Director Notes · UI 해부와 시대의 기록
+            요즘을 버티는 기록
+          </p>
+          <p className="mt-2 text-[12px] uppercase tracking-[0.2em] text-black/40">
+          월간 내 생활
           </p>
         </header>
 
