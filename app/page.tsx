@@ -13,7 +13,7 @@ export default function Home() {
             SIDAELOG · ISSUE 001
           </div>
           <h1 className="mt-3 text-[48px] leading-[1.02] tracking-[-0.05em]">
-            시대Log
+            시대log
           </h1>
           <p className="mt-4 max-w-[60ch] text-[15px] leading-[1.85] text-black/65">
             요즘을 버티는 기록
