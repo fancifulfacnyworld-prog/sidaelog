@@ -1,26 +1,37 @@
 @import "tailwindcss";
 
+/* 기본 컬러 + 폰트 변수 */
 :root {
-  --background: #ffffff;
+  --background: #f6f6f4;
   --foreground: #171717;
+
+  --font-serif: "Noto Serif KR", serif;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
+/* 다크모드 대응 */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #0f0f0f;
+    --foreground: #e5e5e5;
   }
 }
 
+/* 기본 바디 */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  letter-spacing: -0.01em;
+}
+
+/* 제목은 세리프로 */
+h1, h2, h3 {
+  font-family: var(--font-serif);
+  letter-spacing: -0.02em;
+}
+
+/* 부드러운 스크롤 */
+html {
+  scroll-behavior: smooth;
 }
