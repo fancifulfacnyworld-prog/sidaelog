@@ -1,48 +1,46 @@
-import Link from "next/link";
-import { getAllArticles } from "@/lib/articles";
+// app/articles/[slug]/page.tsx
+import fs from "node:fs";
+import path from "node:path";
+import matter from "gray-matter";
+import { notFound } from "next/navigation";
+import { ArticleLayout } from "@/components/ArticleLayout";
 
-export default function Home() {
-  const articles = getAllArticles();
+const ARTICLES_DIR = path.join(process.cwd(), "content", "articles");
+
+// Next 16: params 가 Promise 라는 룰 반영
+type ArticleParams = {
+  slug: string;
+};
+
+type ArticlePageProps = {
+  params: Promise<ArticleParams>;
+};
+
+export default async function ArticlePage({ params }: ArticlePageProps) {
+  const { slug } = await params;
+
+  const fileName = `${slug}.mdx`;
+  const fullPath = path.join(ARTICLES_DIR, fileName);
+
+  if (!fs.existsSync(fullPath)) {
+    notFound();
+  }
+
+  // mdx 파일을 "마크다운 텍스트"로 읽기
+  const raw = fs.readFileSync(fullPath, "utf8");
+  const { data, content } = matter(raw);
 
   return (
-    <main className="min-h-screen bg-[#f6f6f4] px-5 py-12">
-      <div className="mx-auto max-w-[720px]">
-        <div className="text-[12px] tracking-[0.12em] uppercase text-black/50">
-          SIDAELOG · Issue 001
-        </div>
-
-        <h1 className="mt-3 text-4xl tracking-[-0.03em]">시대로그</h1>
-        <p className="mt-3 text-black/60">
-          Director Notes · 게임 UI 해부와 시대의 기록
-        </p>
-
-        <div className="mt-8 h-px bg-black/10" />
-
-        <ul className="mt-8 space-y-6">
-          {articles.map((a) => (
-            <li key={a.slug}>
-              <Link
-                href={`/articles/${a.slug}`}
-                className="group block"
-              >
-                <div className="text-[12px] tracking-[0.12em] uppercase text-black/45">
-                  {a.date}
-                </div>
-                <div className="mt-2 text-[20px] leading-[1.25] tracking-[-0.02em]">
-                  <span className="group-hover:underline group-hover:underline-offset-4">
-                    {a.title}
-                  </span>
-                </div>
-                {a.subtitle ? (
-                  <div className="mt-2 text-[14px] leading-[1.6] text-black/60">
-                    {a.subtitle}
-                  </div>
-                ) : null}
-              </Link>
-            </li>
-          ))}
-        </ul>
+    <ArticleLayout
+      title={data.title ?? slug}
+      subtitle={data.subtitle}
+      date={data.date}
+      tags={data.tags}
+    >
+      {/* 우선은 그냥 텍스트/마크다운으로 보여주기 */}
+      <div className="whitespace-pre-wrap text-[15px] leading-relaxed">
+        {content}
       </div>
-    </main>
+    </ArticleLayout>
   );
 }
