@@ -22,7 +22,7 @@ export default function Home() {
           </h1>
 
           <p className="mt-8 max-w-[60ch] text-[15px] leading-[1.46] text-black/65">
-            시대를 읽고 기록하자
+            시대의 흐름 속, 나다움의 결을 찾아
           </p>
 
           <p className="mt-2.5 text-[10px] uppercase tracking-[0.2em] text-black/40">
