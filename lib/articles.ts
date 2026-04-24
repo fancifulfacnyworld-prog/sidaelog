@@ -9,13 +9,18 @@ export type ArticleMeta = {
   title: string;
   subtitle?: string;
   date: string; // YYYY-MM-DD
-  tags?: string[];
+  tags: string[];
+  series: string;
+  parent: string;
+  isRoot: boolean;
 };
 
 export function getAllArticles(): ArticleMeta[] {
   if (!fs.existsSync(ARTICLES_DIR)) return [];
 
-  const files = fs.readdirSync(ARTICLES_DIR).filter((f) => f.endsWith(".mdx"));
+  const files = fs
+    .readdirSync(ARTICLES_DIR)
+    .filter((file) => file.endsWith(".mdx"));
 
   const items = files.map((file) => {
     const slug = file.replace(/\.mdx$/, "");
@@ -28,11 +33,15 @@ export function getAllArticles(): ArticleMeta[] {
       title: String(data.title ?? slug),
       subtitle: data.subtitle ? String(data.subtitle) : undefined,
       date: String(data.date ?? "1970-01-01"),
-      tags: Array.isArray(data.tags) ? data.tags.map(String) : undefined,
+      tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
+      series: data.series ? String(data.series) : "",
+      parent: data.parent ? String(data.parent) : "",
+      isRoot: Boolean(data.isRoot),
     } satisfies ArticleMeta;
   });
 
   items.sort((a, b) => (a.date < b.date ? 1 : -1));
+
   return items;
 }
 

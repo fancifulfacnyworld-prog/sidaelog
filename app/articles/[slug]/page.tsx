@@ -31,14 +31,14 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   const { data, content } = matter(raw);
 
   return (
-    <ArticleLayout
-      title={data.title ?? slug}
-      subtitle={data.subtitle}
-      date={data.date}
-      tags={data.tags}
-    >
+  <ArticleLayout
+  title={String(data.title ?? slug)}
+  subtitle={data.subtitle ? String(data.subtitle) : undefined}
+  date={data.date ? String(data.date) : undefined}
+  tags={Array.isArray(data.tags) ? data.tags.map(String) : []}
+>
       {/* 우선은 그냥 텍스트/마크다운으로 보여주기 */}
-      <div className="whitespace-pre-wrap text-[15px] leading-relaxed">
+      <div className="whitespace-pre-wrap text-[15px] leading-relaxed font-sans">
         {content}
       </div>
     </ArticleLayout>
