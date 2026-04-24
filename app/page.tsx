@@ -185,9 +185,9 @@ export default function Home() {
         {/* Footer */}
         <footer className="mt-20 border-t border-black/10 pt-8 pb-10">
           <p className="max-w-[42ch] text-[15px] leading-[1.9] tracking-[-0.01em] text-black/55">
-            시대log는 지나가는 시간을 기록합니다.
+            © 2026 시대log
             <br />
-            나다움과 결을 찾아
+            Notes on design, culture and time.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-x-5 gap-y-2 text-[12px] uppercase tracking-[0.16em] text-black/40">
