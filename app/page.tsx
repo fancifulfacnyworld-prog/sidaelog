@@ -199,7 +199,7 @@ export default function Home() {
             </a>
 
             <a
-              href="https://www.linkedin.com/in/"
+              href="https://www.linkedin.com/in/혜수-김-4210602b5/"
               target="_blank"
               rel="noreferrer"
               className="transition hover:text-black"
