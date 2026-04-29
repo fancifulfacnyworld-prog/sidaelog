@@ -4,9 +4,12 @@ import { getAllArticles } from "@/lib/articles";
 export default function Home() {
   const articles = getAllArticles();
 
-  const featured = articles[0];
-  const latest = articles.slice(1);
   const rootArticles = articles.filter((article) => article.isRoot);
+  const featured = rootArticles[0];
+
+  const latest = featured
+    ? articles.filter((article) => article.slug !== featured.slug)
+    : articles;
 
   return (
     <main className="min-h-screen bg-[#f6f6f4] px-5 py-12">
@@ -84,14 +87,32 @@ export default function Home() {
                 href={`/articles/${a.slug}`}
                 className="block px-5 py-5 transition hover:bg-white/60"
               >
-                <div className="flex items-baseline justify-between gap-4">
-                  <div className="text-[18px] leading-[1.35] tracking-[-0.02em]">
-                    {a.parent ? "↳ " : ""}
-                    {a.title}
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    {a.parent ? (
+                      <div className="mb-2 flex flex-wrap gap-2 text-[10px] uppercase tracking-[0.14em] text-black/35">
+                        <span className="rounded-full border border-black/10 px-2 py-0.5">
+                          Thread
+                        </span>
+                        {a.series ? (
+                          <span className="rounded-full border border-black/10 px-2 py-0.5">
+                            From {a.series}
+                          </span>
+                        ) : null}
+                        <span className="rounded-full border border-black/10 px-2 py-0.5">
+                          Spin-off
+                        </span>
+                      </div>
+                    ) : null}
+
+                    <div className="text-[18px] leading-[1.35] tracking-[-0.02em]">
+                      {a.parent ? "↳ " : ""}
+                      {a.title}
+                    </div>
                   </div>
 
                   {a.date ? (
-                    <div className="shrink-0 text-[12px] tracking-[0.14em] uppercase text-black/45">
+                    <div className="shrink-0 pt-1 text-[12px] tracking-[0.14em] uppercase text-black/45">
                       {a.date}
                     </div>
                   ) : null}
