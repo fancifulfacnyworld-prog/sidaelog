@@ -3,13 +3,19 @@ import { getAllArticles } from "@/lib/articles";
 
 export default function Home() {
   const articles = getAllArticles();
-
+  
   const rootArticles = articles.filter((article) => article.isRoot);
-  const featured = rootArticles[0];
-
+  
+  const newestArticle = articles[0];
+  
+  const featured =
+  newestArticle?.parent
+    ? articles.find((article) => article.slug === newestArticle.parent)
+    : newestArticle;
+    
   const latest = featured
-    ? articles.filter((article) => article.slug !== featured.slug)
-    : articles;
+  ? articles.filter((article) => article.slug !== featured.slug)
+  : articles;
 
   return (
     <main className="min-h-screen bg-[#f6f6f4] px-5 py-12">
@@ -19,10 +25,10 @@ export default function Home() {
           <div className="text-[12px] tracking-[0.22em] uppercase text-black/40">
             SIDAELOG · ISSUE 001
           </div>
-
-          <h1 className="mt-3 text-[48px] leading-[1.02] tracking-[-0.05em]">
+          
+          <h1 className="logo-serif mt-3 text-[48px] leading-[1.02] tracking-[-0.05em]">
             시대log
-          </h1>
+            </h1>
 
           <p className="mt-8 max-w-[60ch] text-[15px] leading-[1.46] text-black/65">
             시대의 흐름 속, 나다움의 결을 찾아
@@ -48,7 +54,7 @@ export default function Home() {
                 {featured.date}
               </div>
 
-              <h2 className="mt-3 text-[28px] leading-[1.2] tracking-[-0.03em]">
+              <h2 className="mt-3 text-[28px] font-normal text-black/75 leading-[1.25] tracking-[-0.02em]">
                 {featured.title}
               </h2>
 
@@ -105,7 +111,7 @@ export default function Home() {
                       </div>
                     ) : null}
 
-                    <div className="text-[18px] leading-[1.35] tracking-[-0.02em]">
+                    <div className="text-[17px] font-normal text-black/80 leading-[1.5] tracking-[-0.01em]">
                       {a.parent ? "↳ " : ""}
                       {a.title}
                     </div>
@@ -169,7 +175,7 @@ export default function Home() {
                       {root.series || "Thread"}
                     </div>
 
-                    <div className="mt-2 text-[18px] leading-[1.35] tracking-[-0.02em]">
+                    <div className="mt-2 text-[17px] font-normal text-black/80 leading-[1.5] tracking-[-0.01em]">
                       {root.title}
                     </div>
 

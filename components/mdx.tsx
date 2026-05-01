@@ -1,13 +1,21 @@
 import type { ReactNode } from "react";
 import { Spoiler } from "./Spoiler";
 
-export function PullQuote({ children }: { children: ReactNode }) {
+export function PullQuote({ children }: { children: React.ReactNode }) {
   return (
-    <div className="my-10 border-l-2 border-black/20 pl-5">
-      <p className="text-[22px] leading-[1.35] tracking-[-0.02em] text-black/85">
+    <blockquote className="my-10 border-l-2 border-black/20 pl-5">
+      <div className="text-[16px] leading-[1.8] tracking-[-0.01em] text-black/70">
         {children}
-      </p>
-    </div>
+      </div>
+    </blockquote>
+  );
+}
+
+export function SectionTitle({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="mt-12 mb-4 block text-[20px] font-medium tracking-[-0.02em] text-black/85">
+      {children}
+    </span>
   );
 }
 
