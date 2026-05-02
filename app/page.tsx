@@ -27,7 +27,7 @@ export default function Home() {
           </div>
           
           <h1 className="logo-serif mt-3 text-[48px] leading-[1.02] tracking-[-0.05em]">
-            시대log
+            시대로그
             </h1>
 
           <p className="mt-8 max-w-[60ch] text-[15px] leading-[1.46] text-black/65">
