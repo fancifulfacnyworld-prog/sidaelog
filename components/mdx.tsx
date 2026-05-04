@@ -11,6 +11,20 @@ export function PullQuote({ children }: { children: React.ReactNode }) {
   );
 }
 
+export function QuestionBlock({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="my-8 rounded-2xl border border-black/10 bg-white/45 px-5 py-5">
+      <div className="mb-3 text-[11px] uppercase tracking-[0.18em] text-black/35">
+        Questions
+      </div>
+
+      <div className="space-y-2 text-[15px] leading-[1.8] text-black/75">
+        {children}
+      </div>
+    </div>
+  );
+}
+
 export function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
     <span className="mt-12 mb-4 block text-[20px] font-medium tracking-[-0.02em] text-black/85">

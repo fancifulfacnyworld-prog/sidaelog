@@ -11,6 +11,8 @@ export type ArticleMeta = {
   date: string; // YYYY-MM-DD
   tags: string[];
   series: string;
+  order?: number;
+  case?: number;
   parent: string;
   isRoot: boolean;
 };
@@ -37,6 +39,7 @@ export function getAllArticles(): ArticleMeta[] {
       series: data.series ? String(data.series) : "",
       parent: data.parent ? String(data.parent) : "",
       isRoot: Boolean(data.isRoot),
+      order: data.order ? Number(data.order) : undefined,
     } satisfies ArticleMeta;
   });
 

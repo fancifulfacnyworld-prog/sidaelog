@@ -30,21 +30,21 @@ export function ArticleLayout({
           </div>
         </div>
 
-        {/* Meta */}
+        {/* Date */}
         {date ? (
-          <div className="text-[12px] tracking-[0.14em] uppercase text-black/50">
+          <div className="mb-4 text-[12px] tracking-[0.14em] uppercase text-black/45">
             {date}
           </div>
         ) : null}
 
         {/* Title */}
-        <h1 className="mt-3 text-[38px] leading-[1.08] tracking-[-0.04em]">
+        <h1 className="text-[38px] leading-[1.08] tracking-[-0.04em] text-black/90">
           {title}
         </h1>
 
-        {/* Subtitle */}
+        {/* Game / Subtitle */}
         {subtitle ? (
-          <p className="mt-4 max-w-[60ch] text-[15px] leading-[1.8] text-black/65">
+          <p className="mt-4 max-w-[60ch] text-[15px] leading-[1.8] text-black/55">
             {subtitle}
           </p>
         ) : null}
@@ -55,7 +55,7 @@ export function ArticleLayout({
             {tags.map((t) => (
               <span
                 key={t}
-                className="rounded-full border border-black/10 bg-white/40 px-3 py-1 text-[12px] text-black/65"
+                className="rounded-full border border-black/10 bg-white/40 px-3 py-1 text-[12px] text-black/55"
               >
                 {t}
               </span>
