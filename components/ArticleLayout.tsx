@@ -63,11 +63,8 @@ export function ArticleLayout({
           </div>
         ) : null}
 
-        {/* Divider */}
-        <div className="mt-8 h-px w-full bg-black/10" />
-
         {/* Body */}
-        <div className="mt-9 text-[16.5px] leading-[1.9] tracking-[-0.01em] text-black/90">
+        <div className="mt-6 text-[16.5px] leading-[1.9] tracking-[-0.01em] text-black/90">
           {children}
         </div>
 

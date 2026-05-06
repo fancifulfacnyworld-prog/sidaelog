@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 
@@ -118,9 +119,30 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         </div>
       ) : null}
 
-      <div className="text-[15px] leading-[1.9] tracking-[-0.01em]">
-        <MDXRemote source={content} components={mdxComponents} />
-      </div>
+      {data.cover ? (
+  <div className="mb-10">
+    <div className="overflow-hidden rounded-3xl border border-black/10">
+      <Image
+        src={String(data.cover)}
+        alt={String(data.title ?? "")}
+        width={1200}
+        height={630}
+        className="h-auto w-full object-cover"
+        priority
+      />
+    </div>
+
+    {data.coverCredit ? (
+      <p className="mt-3 text-right text-[11px] tracking-[0.04em] text-black/35">
+        {String(data.coverCredit)}
+      </p>
+    ) : null}
+  </div>
+) : null}
+
+<div className="text-[15px] leading-[1.9] tracking-[-0.01em]">
+  <MDXRemote source={content} components={mdxComponents} />
+</div>
 
       {children.length ? (
         <div className="mt-16 border-t border-black/10 pt-6">
