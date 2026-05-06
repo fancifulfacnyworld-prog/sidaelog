@@ -19,6 +19,58 @@ type ArticlePageProps = {
   params: Promise<ArticleParams>;
 };
 
+/* OG Metadata */
+export async function generateMetadata({ params }: ArticlePageProps) {
+  const { slug } = await params;
+
+  const fullPath = path.join(ARTICLES_DIR, `${slug}.mdx`);
+
+  if (!fs.existsSync(fullPath)) {
+    return {
+      title: "시대로그",
+      description: "시대를 읽고 기록하는 매거진",
+    };
+  }
+
+  const raw = fs.readFileSync(fullPath, "utf8");
+  const { data } = matter(raw);
+
+  const title = String(data.title ?? slug);
+
+  const description = String(
+    data.subtitle ?? "시대를 읽고 기록하는 매거진"
+  );
+
+  const cover = data.cover
+    ? String(data.cover)
+    : "/og/default.jpg";
+
+  return {
+    title,
+    description,
+
+    openGraph: {
+      title,
+      description,
+
+      images: [
+        {
+          url: cover,
+          width: 1200,
+          height: 630,
+        },
+      ],
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [cover],
+    },
+  };
+}
+
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const { slug } = await params;
 
@@ -31,15 +83,18 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
   const raw = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(raw);
+
   const articles = getAllArticles();
+
   const children = articles
-  .filter((article) => article.parent === slug)
-  .sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
+    .filter((article) => article.parent === slug)
+    .sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
+
   const parentSlug = data.parent ? String(data.parent) : "";
+
   const parentArticle = parentSlug
     ? articles.find((article) => article.slug === parentSlug)
     : undefined;
-    
 
   return (
     <ArticleLayout
@@ -66,26 +121,26 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       <div className="text-[15px] leading-[1.9] tracking-[-0.01em]">
         <MDXRemote source={content} components={mdxComponents} />
       </div>
-      
-      {children.length ? (
-  <div className="mt-16 border-t border-black/10 pt-6">
-    <div className="text-[12px] uppercase tracking-[0.16em] text-black/40">
-      Further Questions
-    </div>
 
-    <div className="mt-4 space-y-3">
-      {children.map((child, index) => (
-        <Link
-          key={child.slug}
-          href={`/articles/${child.slug}`}
-          className="block text-[15px] leading-[1.7] text-black/65 hover:text-black"
-        >
-          {String(index + 1).padStart(2, "0")} · {child.title}
-        </Link>
-      ))}
-    </div>
-  </div>
-) : null}
+      {children.length ? (
+        <div className="mt-16 border-t border-black/10 pt-6">
+          <div className="text-[12px] uppercase tracking-[0.16em] text-black/40">
+            Further Questions
+          </div>
+
+          <div className="mt-4 space-y-3">
+            {children.map((child, index) => (
+              <Link
+                key={child.slug}
+                href={`/articles/${child.slug}`}
+                className="block text-[15px] leading-[1.7] text-black/65 hover:text-black"
+              >
+                {String(index + 1).padStart(2, "0")} · {child.title}
+              </Link>
+            ))}
+          </div>
+        </div>
+      ) : null}
     </ArticleLayout>
   );
 }

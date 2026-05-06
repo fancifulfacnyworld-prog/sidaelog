@@ -15,6 +15,7 @@ const sans = Inter({
   display: "swap",
 });
 
+
 <head>
   <link
     href="https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/static/woff2/SUIT.css"
@@ -23,6 +24,7 @@ const sans = Inter({
 </head>
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://sidaelog.vercel.app/"),
   title: "시대로그",
   description: "시대를 읽고 기록하는 매거진",
 };
