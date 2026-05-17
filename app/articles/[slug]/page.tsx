@@ -10,7 +10,7 @@ import { ArticleLayout } from "@/components/ArticleLayout";
 import { getAllArticles } from "@/lib/articles";
 import * as mdxComponents from "@/components/mdx";
 
-const ARTICLES_DIR = path.join(process.cwd(), "content", "articles");
+const ARTICLES_DIR = path.join(process.cwd(), "content", "cases");
 
 type ArticleParams = {
   slug: string;
