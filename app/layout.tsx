@@ -46,15 +46,29 @@ export default function RootLayout({
     </Link>
 
     {/* 메뉴 묶음 */}
-    <div className="flex gap-4 text-[13px] text-black/60">
-      <Link href="/" className="hover:text-black">
-        Home
-      </Link>
+<div className="flex items-center text-[13px] text-black/60">
+  <Link href="/" className="hover:text-black">
+    Home
+  </Link>
 
-      <Link href="/cases" className="hover:text-black">
-        Cases
-      </Link>
-    </div>
+  <span className="mx-3 text-black/20">·</span>
+
+  <Link href="/cases" className="hover:text-black">
+    케이스
+  </Link>
+
+  <span className="mx-3 text-black/20">·</span>
+
+  <Link href="/kernel" className="hover:text-black">
+    알맹이
+  </Link>
+
+  <span className="mx-3 text-black/20">·</span>
+
+  <Link href="/texture-collector" className="hover:text-black">
+    결 수집가
+  </Link>
+</div>
 
   </div>
 </nav>

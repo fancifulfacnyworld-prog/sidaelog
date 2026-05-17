@@ -84,3 +84,19 @@ export function Figure({
 }
 
 export { Spoiler };
+
+export const a = (
+  props: React.AnchorHTMLAttributes<HTMLAnchorElement>
+) => {
+  return (
+    <a
+      {...props}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex items-center gap-1 text-[#3566d6] underline underline-offset-4 transition hover:opacity-70"
+    >
+      {props.children}
+      <span className="text-[11px]">↗</span>
+    </a>
+  );
+};
