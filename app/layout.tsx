@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Noto_Serif_KR, Inter } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 
 const serif = Noto_Serif_KR({
@@ -15,13 +16,6 @@ const sans = Inter({
   display: "swap",
 });
 
-
-<head>
-  <link
-    href="https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/static/woff2/SUIT.css"
-    rel="stylesheet"
-  />
-</head>
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://sidaelog.vercel.app/"),
@@ -73,6 +67,7 @@ export default function RootLayout({
   </div>
 </nav>
         {children}
+        <GoogleAnalytics gaId="G-WDQT737VSB" />
       </body>
     </html>
   );
