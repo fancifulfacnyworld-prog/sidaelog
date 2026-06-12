@@ -14,66 +14,89 @@ export function ArticleLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main className="min-h-screen bg-[#f6f6f4] px-5 py-12">
-      <article className="mx-auto max-w-[760px]">
-        {/* Top nav */}
-        <div className="mb-8 flex items-center justify-between">
-          <Link
-            href="/"
-            className="inline-block text-[12px] tracking-[0.18em] uppercase text-black/45 hover:text-black hover:underline hover:underline-offset-4"
-          >
-            ← Index
-          </Link>
+    <main className="flex min-h-screen flex-col bg-[#fdfcfa] md:flex-row">
+      {/* ─── 좌측 메타 패널 (홈 좌측 패널과 동일 언어) ─── */}
+      <aside className="flex shrink-0 flex-col border-b-2 border-[#16140f] px-6 py-7 md:sticky md:top-0 md:h-screen md:w-[260px] md:border-b-0 md:border-r-2">
+        <Link
+          href="/"
+          className="text-[22px] font-extrabold tracking-[-0.05em] text-[#16140f]"
+        >
+          시대<span className="logo-serif font-normal">log</span>
+        </Link>
 
-          <div className="text-[12px] tracking-[0.18em] uppercase text-black/35">
-            SIDAELOG
+        <Link
+          href="/"
+          className="mt-5 text-[11px] uppercase tracking-[0.16em] text-[#16140f]/45 transition hover:text-[#c2552e]"
+        >
+          ← 목록으로
+        </Link>
+
+        {/* 메타 정보 */}
+        <div className="mt-10 space-y-5 md:mt-auto md:pt-10">
+          {subtitle ? (
+            <div>
+              <div className="text-[9px] uppercase tracking-[0.18em] text-[#16140f]/35">
+                Game
+              </div>
+              <div className="mt-1 text-[13px] font-bold tracking-[-0.01em] text-[#16140f]">
+                {subtitle}
+              </div>
+            </div>
+          ) : null}
+
+          {date ? (
+            <div>
+              <div className="text-[9px] uppercase tracking-[0.18em] text-[#16140f]/35">
+                Date
+              </div>
+              <div className="mt-1 text-[12px] tracking-[0.04em] text-[#16140f]/60">
+                {date}
+              </div>
+            </div>
+          ) : null}
+
+          {tags?.length ? (
+            <div>
+              <div className="mb-2 text-[9px] uppercase tracking-[0.18em] text-[#16140f]/35">
+                Tags
+              </div>
+              <div className="flex flex-wrap gap-1.5">
+                {tags.map((t) => (
+                  <span
+                    key={t}
+                    className="rounded-full border border-[#16140f]/25 px-2.5 py-1 text-[10px] text-[#16140f]/60"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ) : null}
+        </div>
+      </aside>
+
+      {/* ─── 우측 본문 ─── */}
+      <article className="flex-1 px-6 py-12 md:px-14 md:py-16">
+        <div className="mx-auto max-w-[720px]">
+          {/* 상단 라벨 */}
+          <div className="mb-5 text-[10px] uppercase tracking-[0.22em] text-[#16140f]/35">
+            Sidaelog · Director Notes
+          </div>
+
+          {/* 제목 */}
+          <h1 className="text-[38px] font-extrabold leading-[1.08] tracking-[-0.045em] text-[#16140f] md:text-[46px]">
+            {title}
+          </h1>
+
+          {/* 본문 */}
+          <div className="prose-mag mt-10">{children}</div>
+
+          {/* 푸터 */}
+          <div className="mt-16 flex items-center justify-between border-t-2 border-[#16140f] pt-5 text-[10px] uppercase tracking-[0.12em] text-[#16140f]/45">
+            <span>시대log · Notes on design, culture and time</span>
+            <span>© {new Date().getFullYear()}</span>
           </div>
         </div>
-
-        {/* Date */}
-        {date ? (
-          <div className="mb-4 text-[12px] tracking-[0.14em] uppercase text-black/45">
-            {date}
-          </div>
-        ) : null}
-
-        {/* Title */}
-        <h1 className="text-[38px] leading-[1.08] tracking-[-0.04em] text-black/90">
-          {title}
-        </h1>
-
-        {/* Game / Subtitle */}
-        {subtitle ? (
-          <p className="mt-4 max-w-[60ch] text-[15px] leading-[1.8] text-black/55">
-            {subtitle}
-          </p>
-        ) : null}
-
-        {/* Tags */}
-        {tags?.length ? (
-          <div className="mt-5 flex flex-wrap gap-2">
-            {tags.map((t) => (
-              <span
-                key={t}
-                className="rounded-full border border-black/10 bg-white/40 px-3 py-1 text-[12px] text-black/55"
-              >
-                {t}
-              </span>
-            ))}
-          </div>
-        ) : null}
-
-        {/* Body */}
-        <div className="mt-6 text-[16.5px] leading-[1.9] tracking-[-0.01em] text-black/90">
-          {children}
-        </div>
-
-        {/* Footer */}
-        <div className="mt-14 h-px w-full bg-black/10" />
-        <footer className="mt-6 flex items-center justify-between text-[12px] tracking-[0.12em] uppercase text-black/45">
-          <span>시대로그 · Director Notes</span>
-          <span>© {new Date().getFullYear()}</span>
-        </footer>
       </article>
     </main>
   );

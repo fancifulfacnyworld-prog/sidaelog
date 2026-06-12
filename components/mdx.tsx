@@ -3,8 +3,8 @@ import { Spoiler } from "./Spoiler";
 
 export function PullQuote({ children }: { children: React.ReactNode }) {
   return (
-    <blockquote className="my-10 border-l-2 border-black/20 pl-5">
-      <div className="text-[16px] leading-[1.8] tracking-[-0.01em] text-black/70">
+    <blockquote className="my-10 border-l-[3px] border-[#c2552e] pl-5">
+      <div className="text-[19px] font-semibold leading-[1.5] tracking-[-0.02em] text-[#16140f]">
         {children}
       </div>
     </blockquote>
@@ -13,12 +13,12 @@ export function PullQuote({ children }: { children: React.ReactNode }) {
 
 export function QuestionBlock({ children }: { children: React.ReactNode }) {
   return (
-    <div className="my-8 rounded-2xl border border-black/10 bg-white/45 px-5 py-5">
-      <div className="mb-3 text-[11px] uppercase tracking-[0.18em] text-black/35">
+    <div className="my-8 rounded-lg border-[1.5px] border-[#16140f] bg-[#16140f]/[0.03] px-5 py-5">
+      <div className="mb-3 text-[10px] font-bold uppercase tracking-[0.18em] text-[#c2552e]">
         Questions
       </div>
 
-      <div className="space-y-2 text-[15px] leading-[1.8] text-black/75">
+      <div className="space-y-2 text-[15px] leading-[1.8] text-[#16140f]/80">
         {children}
       </div>
     </div>
@@ -27,7 +27,7 @@ export function QuestionBlock({ children }: { children: React.ReactNode }) {
 
 export function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
-    <span className="mt-12 mb-4 block text-[20px] font-medium tracking-[-0.02em] text-black/85">
+    <span className="mt-12 mb-4 block text-[20px] font-bold tracking-[-0.03em] text-[#16140f]">
       {children}
     </span>
   );
@@ -41,14 +41,14 @@ export function Callout({
   children: ReactNode;
 }) {
   return (
-    <div className="my-8 rounded-2xl border border-black/10 bg-white/60 p-5">
+    <div className="my-8 rounded-lg border-[1.5px] border-[#16140f] bg-[#fdfcfa] p-5">
       {title ? (
-        <div className="text-[12px] tracking-[0.18em] uppercase text-black/55">
+        <div className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#c2552e]">
           {title}
         </div>
       ) : null}
 
-      <div className="mt-3 text-[15px] leading-[1.8] text-black/80">
+      <div className="mt-3 text-[15px] leading-[1.8] text-[#16140f]/85">
         {children}
       </div>
     </div>
@@ -56,7 +56,7 @@ export function Callout({
 }
 
 export function Divider() {
-  return <div className="my-10 h-px w-full bg-black/10" />;
+  return <div className="my-10 h-[2px] w-full bg-[#16140f]" />;
 }
 
 export function Figure({
@@ -71,11 +71,11 @@ export function Figure({
       <img
         src={src}
         alt={caption ?? ""}
-        className="w-full border border-black/10 bg-white/40"
+        className="w-full border-[1.5px] border-[#16140f]"
       />
 
       {caption ? (
-        <figcaption className="mt-3 text-[12px] leading-[1.6] text-black/55">
+        <figcaption className="mt-3 text-[12px] leading-[1.6] text-[#16140f]/55">
           {caption}
         </figcaption>
       ) : null}
@@ -93,7 +93,7 @@ export const a = (
       {...props}
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-flex items-center gap-1 text-[#3566d6] underline underline-offset-4 transition hover:opacity-70"
+      className="inline-flex items-center gap-1 text-[#c2552e] underline underline-offset-4 transition hover:opacity-70"
     >
       {props.children}
       <span className="text-[11px]">↗</span>

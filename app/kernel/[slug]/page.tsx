@@ -76,9 +76,7 @@ export default async function KernelArticlePage({ params }: KernelPageProps) {
       date={data.date ? String(data.date) : undefined}
       tags={Array.isArray(data.tags) ? data.tags.map(String) : []}
     >
-      <div className="text-[15px] leading-[1.9] tracking-[-0.01em]">
-        <MDXRemote source={content} components={mdxComponents} />
-      </div>
+      <MDXRemote source={content} components={mdxComponents} />
     </ArticleLayout>
   );
 }

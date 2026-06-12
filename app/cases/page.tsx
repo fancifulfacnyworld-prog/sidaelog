@@ -1,4 +1,6 @@
 import Link from "next/link";
+import Image from "next/image";
+import { SidePanel } from "@/components/SidePanel";
 import { getAllArticles } from "@/lib/articles";
 
 export default function CasesPage() {
@@ -6,31 +8,77 @@ export default function CasesPage() {
 
   const cases = articles
     .filter((a) => a.isRoot)
-    .sort((a, b) => (a.case ?? 0) - (b.case ?? 0));
+    .sort((a, b) => b.date.localeCompare(a.date));
+
+  const subCount = (slug: string) =>
+    articles.filter((a) => a.parent === slug).length;
 
   return (
-    <main className="min-h-screen bg-[#f6f6f4] px-5 py-12">
-      <div className="mx-auto max-w-[920px]">
-        <h1 className="text-[32px] mb-8">Cases</h1>
+    <div className="flex min-h-screen flex-col bg-[#fdfcfa] md:flex-row">
+      <SidePanel active="cases" />
 
-        <div className="space-y-6">
-          {cases.map((c) => (
-            <Link
-              key={c.slug}
-              href={`/articles/${c.slug}`}
-              className="block border rounded-xl px-5 py-5 bg-white hover:bg-white/70"
-            >
-              <div className="text-[12px] uppercase text-black/40">
-                Case {String(c.case).padStart(2, "0")}
-              </div>
+      <main className="flex-1 px-6 py-12 md:px-14 md:py-16">
+        <div className="mx-auto max-w-[900px]">
+          <div className="text-[10px] uppercase tracking-[0.22em] text-[#16140f]/35">
+            Sidaelog · Cases
+          </div>
+          <h1 className="mt-2 text-[44px] font-extrabold leading-[1.05] tracking-[-0.05em] text-[#16140f]">
+            케이스
+          </h1>
+          <p className="mt-4 max-w-[46ch] text-[14px] leading-[1.7] text-[#16140f]/55">
+            게임 하나를 깊이 파고드는 분석 시리즈. 각 케이스는 본문과
+            이어지는 질문들로 구성됩니다.
+          </p>
 
-              <div className="mt-2 text-[20px]">
-                {c.title}
-              </div>
-            </Link>
-          ))}
+          <div className="mt-10 grid gap-5 sm:grid-cols-2">
+            {cases.map((c, i) => (
+              <Link
+                key={c.slug}
+                href={`/articles/${c.slug}`}
+                className="group flex flex-col overflow-hidden rounded-lg border-[1.5px] border-[#16140f] transition hover:-translate-y-1"
+              >
+                {/* 커버 */}
+                <div className="relative aspect-[16/10] overflow-hidden border-b-[1.5px] border-[#16140f]">
+                  {c.cover && (
+                    <Image
+                      src={c.cover}
+                      alt={c.title}
+                      fill
+                      sizes="(max-width: 640px) 100vw, 440px"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  )}
+                  <span className="absolute left-3 top-3 rounded-full bg-[#16140f] px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.1em] text-[#fdfcfa]">
+                    Case {String(i + 1).padStart(2, "0")}
+                  </span>
+                </div>
+
+                {/* 텍스트 */}
+                <div className="flex flex-1 flex-col px-5 py-4">
+                  {c.subtitle && (
+                    <div className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#16140f]/45">
+                      {c.subtitle}
+                    </div>
+                  )}
+                  <h2 className="mt-1.5 text-[21px] font-bold leading-[1.2] tracking-[-0.03em] text-[#16140f]">
+                    {c.title}
+                  </h2>
+
+                  <div className="mt-auto flex items-center gap-3 pt-4 text-[10px] uppercase tracking-[0.08em] text-[#16140f]/40">
+                    <span>{c.date}</span>
+                    {subCount(c.slug) > 0 && (
+                      <>
+                        <span className="text-[#16140f]/20">·</span>
+                        <span>이어지는 글 {subCount(c.slug)}</span>
+                      </>
+                    )}
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </div>
   );
 }

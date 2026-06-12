@@ -105,48 +105,46 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       tags={Array.isArray(data.tags) ? data.tags.map(String) : []}
     >
       {parentArticle ? (
-        <div className="mb-8 rounded-2xl border border-black/10 bg-white/50 px-5 py-4">
-          <p className="text-[13px] leading-[1.8] text-black/55">
+        <div className="mb-8 rounded-lg border-[1.5px] border-[#16140f] bg-[#16140f]/[0.03] px-5 py-4">
+          <p className="text-[13px] leading-[1.8] text-[#16140f]/65">
             이 글은 ‘{parentArticle.title}’에서 이어집니다.
           </p>
 
           <Link
             href={`/articles/${parentArticle.slug}`}
-            className="mt-2 inline-block text-[12px] uppercase tracking-[0.16em] text-black/45 hover:text-black hover:underline hover:underline-offset-4"
+            className="mt-2 inline-block text-[12px] uppercase tracking-[0.16em] text-[#c2552e] hover:underline hover:underline-offset-4"
           >
-            원글 보기
+            원글 보기 →
           </Link>
         </div>
       ) : null}
 
       {data.cover ? (
-  <div className="mb-10">
-    <div className="overflow-hidden rounded-3xl border border-black/10">
-      <Image
-        src={String(data.cover)}
-        alt={String(data.title ?? "")}
-        width={1200}
-        height={630}
-        className="h-auto w-full object-cover"
-        priority
-      />
-    </div>
+        <div className="mb-10">
+          <div className="overflow-hidden rounded-lg border-[1.5px] border-[#16140f]">
+            <Image
+              src={String(data.cover)}
+              alt={String(data.title ?? "")}
+              width={1200}
+              height={630}
+              className="h-auto w-full object-cover"
+              priority
+            />
+          </div>
 
-    {data.coverCredit ? (
-      <p className="mt-3 text-right text-[11px] tracking-[0.04em] text-black/35">
-        {String(data.coverCredit)}
-      </p>
-    ) : null}
-  </div>
-) : null}
+          {data.coverCredit ? (
+            <p className="mt-3 text-right text-[11px] tracking-[0.04em] text-[#16140f]/35">
+              {String(data.coverCredit)}
+            </p>
+          ) : null}
+        </div>
+      ) : null}
 
-<div className="text-[15px] leading-[1.9] tracking-[-0.01em]">
-  <MDXRemote source={content} components={mdxComponents} />
-</div>
+      <MDXRemote source={content} components={mdxComponents} />
 
       {children.length ? (
-        <div className="mt-16 border-t border-black/10 pt-6">
-          <div className="text-[12px] uppercase tracking-[0.16em] text-black/40">
+        <div className="mt-16 border-t-2 border-[#16140f] pt-6">
+          <div className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#c2552e]">
             Further Questions
           </div>
 
@@ -155,7 +153,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               <Link
                 key={child.slug}
                 href={`/articles/${child.slug}`}
-                className="block text-[15px] leading-[1.7] text-black/65 hover:text-black"
+                className="block text-[16px] font-medium leading-[1.7] text-[#16140f]/70 transition hover:text-[#c2552e]"
               >
                 {String(index + 1).padStart(2, "0")} · {child.title}
               </Link>
