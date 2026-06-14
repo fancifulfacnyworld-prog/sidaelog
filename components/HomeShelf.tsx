@@ -135,7 +135,7 @@ export function HomeShelf({
         onFocus={() => setSearchOpen(true)}
         onBlur={() => setSearchOpen(false)}
         placeholder="제목·게임·태그 검색"
-        className="w-full bg-transparent text-[12px] text-[#16140f] outline-none placeholder:text-[#16140f]/35"
+        className="w-full bg-transparent text-[16px] text-[#16140f] outline-none placeholder:text-[#16140f]/35 md:text-[12px]"
       />
       {query && (
         <button
