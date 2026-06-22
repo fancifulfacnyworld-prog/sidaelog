@@ -4,10 +4,10 @@ type Props = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
-  return buildKernelMeta(slug, "ko");
+  return buildKernelMeta(slug, "en");
 }
 
-export default async function KernelArticlePage({ params }: Props) {
+export default async function KernelArticlePageEn({ params }: Props) {
   const { slug } = await params;
-  return <KernelRenderer slug={slug} lang="ko" />;
+  return <KernelRenderer slug={slug} lang="en" />;
 }

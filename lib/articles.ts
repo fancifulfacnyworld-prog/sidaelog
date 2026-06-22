@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
+import type { Lang } from "./i18n";
 
 const ARTICLES_DIR = path.join(process.cwd(), "content", "cases");
 
@@ -38,12 +39,12 @@ function extractExcerpt(content: string): string {
   return "";
 }
 
-export function getAllArticles(): ArticleMeta[] {
+export function getAllArticles(lang: Lang = "ko"): ArticleMeta[] {
   if (!fs.existsSync(ARTICLES_DIR)) return [];
 
   const files = fs
     .readdirSync(ARTICLES_DIR)
-    .filter((file) => file.endsWith(".mdx"));
+    .filter((file) => file.endsWith(".mdx") && !file.endsWith(".en.mdx"));
 
   const items = files.map((file) => {
     const slug = file.replace(/\.mdx$/, "");
@@ -51,10 +52,16 @@ export function getAllArticles(): ArticleMeta[] {
     const raw = fs.readFileSync(fullPath, "utf8");
     const { data, content } = matter(raw);
 
+    const en = lang === "en";
+
     return {
       slug,
-      title: String(data.title ?? slug),
-      subtitle: data.subtitle ? String(data.subtitle) : undefined,
+      title: String((en && data.title_en) || data.title || slug),
+      subtitle: en && data.subtitle_en
+        ? String(data.subtitle_en)
+        : data.subtitle
+          ? String(data.subtitle)
+          : undefined,
       date: String(data.date ?? "1970-01-01"),
       tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
       series: data.series ? String(data.series) : "",
@@ -63,7 +70,9 @@ export function getAllArticles(): ArticleMeta[] {
       order: data.order ? Number(data.order) : undefined,
       case: data.case ? Number(data.case) : undefined,
       cover: data.cover ? String(data.cover) : undefined,
-      excerpt: extractExcerpt(content),
+      excerpt: en && data.excerpt_en
+        ? String(data.excerpt_en)
+        : extractExcerpt(content),
     } satisfies ArticleMeta;
   });
 

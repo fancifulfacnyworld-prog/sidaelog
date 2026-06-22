@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { getDict, type Lang } from "@/lib/i18n";
 
 const LINKS = (
   <>
@@ -8,30 +9,33 @@ const LINKS = (
   </>
 );
 
-export function SidePanel() {
+export function SidePanel({ lang }: { lang: Lang }) {
+  const dict = getDict(lang);
+  const home = lang === "en" ? "/en" : "/";
+
   return (
     <>
       {/* 데스크탑: 좌측 고정 패널 */}
       <aside className="hidden shrink-0 flex-col border-r-2 border-[#16140f] px-6 py-7 md:sticky md:top-0 md:flex md:h-screen md:w-[260px]">
-        <Link href="/" className="text-[24px] font-extrabold tracking-[-0.05em] text-[#16140f]">
+        <Link href={home} className="text-[24px] font-extrabold tracking-[-0.05em] text-[#16140f]">
           시대<span className="logo-serif font-normal">log</span>
         </Link>
         <p className="mt-2.5 text-[12px] leading-[1.6] text-[#16140f]/65">
-          시대를 읽고 기록하는 매거진
+          {dict.brandTagline}
         </p>
         <p className="mt-1.5 text-[9px] uppercase leading-[1.6] tracking-[0.18em] text-[#16140f]/35">
-          Reading the times through design and records
+          {dict.brandEyebrow}
         </p>
         <div className="mt-3 border-t border-[#16140f]/15 pt-3 text-[9px] uppercase tracking-[0.2em] text-[#16140f]/35">
-          Sidaelog · Issue 001
+          {dict.issue}
         </div>
 
         <div className="mt-auto flex gap-1.5 pt-8">{LINKS}</div>
       </aside>
 
-      {/* 모바일: 상단 헤더 (로고만, 간결하게) */}
+      {/* 모바일: 상단 헤더 */}
       <header className="flex shrink-0 items-center justify-between border-b-2 border-[#16140f] px-4 py-3 md:hidden">
-        <Link href="/" className="text-[20px] font-extrabold tracking-[-0.05em] text-[#16140f]">
+        <Link href={home} className="text-[20px] font-extrabold tracking-[-0.05em] text-[#16140f]">
           시대<span className="logo-serif font-normal">log</span>
         </Link>
         <span className="text-[9px] uppercase tracking-[0.18em] text-[#16140f]/35">
