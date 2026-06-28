@@ -41,6 +41,7 @@ const ko = {
     "디렉터의시선": { label: "디렉터의 시선", desc: "" },
     "UI설계": { label: "UI 설계", desc: "" },
     "UX전략": { label: "UX 전략", desc: "" },
+    "기대감 설계": { label: "기대감 설계", desc: "" },
   } as Record<string, { label: string; desc: string }>,
 
   cases: {
@@ -104,6 +105,7 @@ const en: typeof ko = {
     "디렉터의시선": { label: "Director's Eye", desc: "" },
     "UI설계": { label: "UI Design", desc: "" },
     "UX전략": { label: "UX Strategy", desc: "" },
+    "기대감 설계": { label: "Anticipation Design", desc: "" },
   },
 
   cases: {
@@ -177,6 +179,7 @@ const TAG_EN: Record<string, string> = {
   "반드시 알아야 할 게임UI": "Game UI You Must Know",
   "불편한질문": "Uncomfortable Questions",
   "디자인사고": "Design Thinking",
+  "기대감 설계": "Anticipation Design",
   // 게임 타이틀
   "클레르 옵스퀴르:33원정대": "Clair Obscur: Expedition 33",
   "디스코엘리시움": "Disco Elysium",
