@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Noto_Serif_KR, Inter } from "next/font/google";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import { Analytics } from "@/components/Analytics";
 import "./globals.css";
 
 const serif = Noto_Serif_KR({
@@ -30,7 +30,7 @@ export default function RootLayout({
     <html lang="ko" className={`${serif.variable} ${sans.variable}`}>
       <body>
         {children}
-        <GoogleAnalytics gaId="G-WDQT737VSB" />
+        <Analytics gaId="G-WDQT737VSB" />
       </body>
     </html>
   );
